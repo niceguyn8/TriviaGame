@@ -1,6 +1,7 @@
 // Have a button that listens for a click that starts the game
 $('#startButton').on('click',function(){
   $('#startButton').remove();
+  gameStart.displayQuestion();
 });
 
 // WHEN GAME STARTS:
@@ -23,5 +24,61 @@ var questionsArray = [{
   answer: "Mr. T",
   // add fun gif later on
 }];
-// Begin count down using timer
+
+// WHEN GAME STARTS:
+var gameStart = {
+  // questionsArray: questionsArray,
+  questionSelected: 0,
+  timeLeft: 30,
+  correctAnswer: 0,
+  WrongAnswer: 0,
+
+  // WHEN GAME STARTS:
+  // Display 1 question from array of questions
+  displayQuestion: function(){
+    time = setInterval(gameStart.countdown,1000);
+    $("#questionDisplay").text(questionsArray[gameStart.questionSelected].question);
+
+    // Display Answer options (specific to the selected question) from array
+    for (var i = 0; i < questionsArray[gameStart.questionSelected].options.length;i++){
+      $('#answersDisplay').append('<button class="answer-button" id="button- '
+      +i+ '" data-name= "'+questionsArray
+      [gameStart.questionSelected].options[i]+'">'+questionsArray
+      [gameStart.questionSelected].options[i]+'</button>');
+    }
+
+  },
+  // Begin count down using timer
+  timer: function(){
+    gameStart.timer--;
+    $("#timer").text(gameStart.timer);
+    if(gameStart.timer<0){
+      console.log("TIME UP");
+      gameStart.timeOut();
+    }
+  },
+  nextQuestion: function() {
+
+  },
+  timeOut: function(){
+
+  },
+  results: function(){
+
+  },
+  clicked: function(){
+
+  },
+  correctGuess: function(){
+
+  },
+  incorrectGuess: function(){
+
+  },
+  reset: function(){
+
+  },
+
+
+}
 // when count down reaches 0 the user looses
