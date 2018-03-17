@@ -9,6 +9,10 @@ $(document).on('click','.answer-button', function(event){
   gameStart.clicked(event);
 })
 
+$(document).on('click','#reset-button', function(event) {
+  gameStart.reset();
+})
+
 // WHEN GAME STARTS:
 // Display 1 question from array of questions
 // Display Answer options (specific to that selected question) from array
@@ -33,7 +37,7 @@ var questionsArray = [{
 // WHEN GAME STARTS:
 var gameStart = {
   questionSelected: 0,
-  timeLeft: 30,
+  timeLeft: 10,
   correctAnswer: 0,
   wrongAnswer: 0,
 
@@ -41,8 +45,8 @@ var gameStart = {
   // Display 1 question from array of questions
   displayQuestion: function(){
     time = setInterval(gameStart.timer,1000);
-    $("#display").html('<h2>'+questionsArray[gameStart.questionSelected].question+'</h2>');
-
+    $('#display').html("<h2 id='counter'>30<h2>");
+    $("#display").append('<h2>'+questionsArray[gameStart.questionSelected].question+'</h2>');
     // Display Answer options (specific to the selected question) from array
     for (var i = 0; i < questionsArray[gameStart.questionSelected].options.length;i++){
       $('#display').append('<button class="answer-button" id="button- '
@@ -54,24 +58,37 @@ var gameStart = {
   },
   // Begin count down using timer
   timer: function(){
-    gameStart.timer--;
-    $("#timer").html(gameStart.timer);
-    if(gameStart.timer<0){
+    gameStart.timeLeft--;
+    $("#timer").html(gameStart.timeLeft);
+    if(gameStart.timeLeft<=0){
       console.log("TIME UP");
       gameStart.timeOut();
     }
   },
   nextQuestion: function() {
-    gameStart.timeLeft = 30,
+    gameStart.timeLeft = 10,
     $('#timer').html(gameStart.timer);
     gameStart.questionSelected++;
     gameStart.displayQuestion();
   },
   timeOut: function(){
-
+    clearInterval(time);
+    $('#display').html('<h2>Time is up!</h2>')
+    $('#display').append('<h3>You should have guessed: '
+      +questionsArray[gameStart.questionSelected].answer+'</h3>');
+    if(gameStart.questionSelected==questionsArray.length-1){
+      setTimeout(gameStart.results,3+1000);
+    } else {
+      setTimeout(gameStart.nextQuestion,3+1000);
+    }
+      gameStart.wrongAnswer++;
   },
   results: function(){
-
+    clearInterval(time);
+    $('#display').html("<h2>Party's Over</h2>")
+    $('#display').append("<h3>Correct: "+gameStart.correctAnswer+"</h3>");
+    $('#display').append("<h3>Incorrect: "+gameStart.wrongAnswer+"</h3>");
+    $('#display').append("<button id='reset-button'> Try Again</button>")
   },
   clicked: function(event){
     clearInterval(time);
@@ -99,6 +116,8 @@ var gameStart = {
     clearInterval(time);
     gameStart.wrongAnswer++;
     $('#display').html('<h2>Wrong! Booooooo!</h2>');
+    $('#display').append('<h3>You should have guessed: '
+      +questionsArray[gameStart.questionSelected].answer+'</h3>');
     if(gameStart.questionSelected==questionsArray.length-1){
       setTimeout(gameStart.results,3+1000);
     } else {
@@ -106,7 +125,11 @@ var gameStart = {
     }
   },
   reset: function(){
-
+    gameStart.questionSelected = 0;
+    gameStart.timeLeft = 0;
+    gameStart.wrongAnswer = 0;
+    gameStart.correctAnswer = 0;
+    gameStart.displayQuestion();
   },
 
 
