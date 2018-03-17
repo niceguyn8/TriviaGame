@@ -4,6 +4,11 @@ $('#startButton').on('click',function(){
   gameStart.displayQuestion();
 });
 
+// see if the answer is correct
+$(document).on('click','.answer-button', function(event){
+  gameStart.clicked(event);
+})
+
 // WHEN GAME STARTS:
 // Display 1 question from array of questions
 // Display Answer options (specific to that selected question) from array
@@ -27,21 +32,20 @@ var questionsArray = [{
 
 // WHEN GAME STARTS:
 var gameStart = {
-  // questionsArray: questionsArray,
   questionSelected: 0,
   timeLeft: 30,
   correctAnswer: 0,
-  WrongAnswer: 0,
+  wrongAnswer: 0,
 
   // WHEN GAME STARTS:
   // Display 1 question from array of questions
   displayQuestion: function(){
-    time = setInterval(gameStart.countdown,1000);
-    $("#questionDisplay").text(questionsArray[gameStart.questionSelected].question);
+    time = setInterval(gameStart.timer,1000);
+    $("#display").html('<h2>'+questionsArray[gameStart.questionSelected].question+'</h2>');
 
     // Display Answer options (specific to the selected question) from array
     for (var i = 0; i < questionsArray[gameStart.questionSelected].options.length;i++){
-      $('#answersDisplay').append('<button class="answer-button" id="button- '
+      $('#display').append('<button class="answer-button" id="button- '
       +i+ '" data-name= "'+questionsArray
       [gameStart.questionSelected].options[i]+'">'+questionsArray
       [gameStart.questionSelected].options[i]+'</button>');
@@ -51,14 +55,17 @@ var gameStart = {
   // Begin count down using timer
   timer: function(){
     gameStart.timer--;
-    $("#timer").text(gameStart.timer);
+    $("#timer").html(gameStart.timer);
     if(gameStart.timer<0){
       console.log("TIME UP");
       gameStart.timeOut();
     }
   },
   nextQuestion: function() {
-
+    gameStart.timeLeft = 30,
+    $('#timer').html(gameStart.timer);
+    gameStart.questionSelected++;
+    gameStart.displayQuestion();
   },
   timeOut: function(){
 
@@ -66,14 +73,37 @@ var gameStart = {
   results: function(){
 
   },
-  clicked: function(){
+  clicked: function(event){
+    clearInterval(time);
+    if($(event.target).data("name")==questionsArray[gameStart.questionSelected].
+      answer){
+        gameStart.correctGuess();
+    } else {
+      gameStart.incorrectGuess();
+    }
 
   },
   correctGuess: function(){
-
+    console.log("User guessed right");
+    clearInterval(time);
+    gameStart.correctAnswer++;
+    $('#display').html('<h2>You got it, dude!</h2>');
+    if(gameStart.questionSelected==questionsArray.length-1){
+      setTimeout(gameStart.results,3+1000);
+    } else {
+      setTimeout(gameStart.nextQuestion,3+1000);
+    }
   },
   incorrectGuess: function(){
-
+    console.log("User Guessed Wrong");
+    clearInterval(time);
+    gameStart.wrongAnswer++;
+    $('#display').html('<h2>Wrong! Booooooo!</h2>');
+    if(gameStart.questionSelected==questionsArray.length-1){
+      setTimeout(gameStart.results,3+1000);
+    } else {
+      setTimeout(gameStart.nextQuestion,3+1000);
+    }
   },
   reset: function(){
 
