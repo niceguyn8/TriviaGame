@@ -99,16 +99,14 @@ var gameStart = {
   },
   clicked: function(event){
     clearInterval(time);
-    // display gif after answer is clicked
-    $('#gif').html('<img src = "assets/images/'+ gifArray[gameStart.questionSelected] +'.gif" width = "400px">');
     if($(event.target).data("name")==questionsArray[gameStart.questionSelected].
       answer){
         gameStart.correctGuess();
     } else {
       gameStart.incorrectGuess();
     }
-    // // display gif after answer is clicked
-    // $('#gif').html('<img src = "assets/images/'+ gifArray[gameStart.questionSelected] +'.gif" width = "400px">');
+    // display gif after answer is clicked
+    $('#gif').html('<img src = "assets/images/'+ gifArray[gameStart.questionSelected] +'.gif" width = "400px">');
   },
   correctGuess: function(){
     console.log("User guessed right");
@@ -128,8 +126,6 @@ var gameStart = {
     $('#display').html('<h2>Wrong! Booooooo!</h2>');
     $('#display').append('<h3>You should have guessed: '
       +questionsArray[gameStart.questionSelected].answer+'</h3>');
-    $('#display').html('<img>'
-      +questionsArray[gameStart.questionSelected].image+'<img>');
     if(gameStart.questionSelected==questionsArray.length-1){
       setTimeout(gameStart.results,5000);
     } else {
