@@ -99,6 +99,7 @@ var gameStart = {
     } else {
       gameStart.incorrectGuess();
     }
+    $('#display').html('<img src = "assets/images/lee.gif" width = "400px">');
   },
   correctGuess: function(){
     console.log("User guessed right");
@@ -118,8 +119,8 @@ var gameStart = {
     $('#display').html('<h2>Wrong! Booooooo!</h2>');
     $('#display').append('<h3>You should have guessed: '
       +questionsArray[gameStart.questionSelected].answer+'</h3>');
-    // $('#display').html('<img>'
-    //   +questionsArray[gameStart.questionSelected].image+'<img>');
+    $('#display').html('<img>'
+      +questionsArray[gameStart.questionSelected].image+'<img>');
     if(gameStart.questionSelected==questionsArray.length-1){
       setTimeout(gameStart.results,3+1000);
     } else {
