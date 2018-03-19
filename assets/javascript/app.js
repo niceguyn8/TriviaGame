@@ -21,7 +21,7 @@ var questionsArray = [{
   question: "Who is the best at karate chops and kicks to the face?",
   options: ["Arnold", "Sly", "Bruce Lee", "Bruce Willi"],
   answer: "Bruce Lee",
-  image: "../images.lee.gif",
+  // image: "../images.lee.gif",
   // add fun gif later on
 }, {
   question: "Who's butt-kicking skills are only matched by their teaching skills?",
@@ -34,6 +34,8 @@ var questionsArray = [{
   answer: "Mr. T",
   // add fun gif later on
 }];
+
+var gifArray = ['lee', 'arnold', 'mr-t'];
 
 // WHEN GAME STARTS:
 var gameStart = {
@@ -71,7 +73,10 @@ var gameStart = {
     $('#timer').html(gameStart.timer);
     gameStart.questionSelected++;
     gameStart.displayQuestion();
+    $('#gif').empty();
   },
+
+  // when count down reaches 0 the user looses
   timeOut: function(){
     clearInterval(time);
     $('#display').html('<h2>Time is up!</h2>')
@@ -86,6 +91,7 @@ var gameStart = {
   },
   results: function(){
     clearInterval(time);
+    $('#gif').empty();
     $('#display').html("<h2>Party's Over</h2>")
     $('#display').append("<h3>Correct: "+gameStart.correctAnswer+"</h3>");
     $('#display').append("<h3>Incorrect: "+gameStart.wrongAnswer+"</h3>");
@@ -93,13 +99,16 @@ var gameStart = {
   },
   clicked: function(event){
     clearInterval(time);
+    // display gif after answer is clicked
+    $('#gif').html('<img src = "assets/images/'+ gifArray[gameStart.questionSelected] +'.gif" width = "400px">');
     if($(event.target).data("name")==questionsArray[gameStart.questionSelected].
       answer){
         gameStart.correctGuess();
     } else {
       gameStart.incorrectGuess();
     }
-    $('#display').html('<img src = "assets/images/lee.gif" width = "400px">');
+    // // display gif after answer is clicked
+    // $('#gif').html('<img src = "assets/images/'+ gifArray[gameStart.questionSelected] +'.gif" width = "400px">');
   },
   correctGuess: function(){
     console.log("User guessed right");
@@ -107,9 +116,9 @@ var gameStart = {
     gameStart.correctAnswer++;
     $('#display').html('<h2>You got it, dude!</h2>');
     if(gameStart.questionSelected==questionsArray.length-1){
-      setTimeout(gameStart.results,3+1000);
+      setTimeout(gameStart.results,5000);
     } else {
-      setTimeout(gameStart.nextQuestion,3+1000);
+      setTimeout(gameStart.nextQuestion,5000);
     }
   },
   incorrectGuess: function(){
@@ -122,9 +131,9 @@ var gameStart = {
     $('#display').html('<img>'
       +questionsArray[gameStart.questionSelected].image+'<img>');
     if(gameStart.questionSelected==questionsArray.length-1){
-      setTimeout(gameStart.results,3+1000);
+      setTimeout(gameStart.results,5000);
     } else {
-      setTimeout(gameStart.nextQuestion,3+1000);
+      setTimeout(gameStart.nextQuestion,5000);
     }
   },
   reset: function(){
@@ -137,4 +146,3 @@ var gameStart = {
 
 
 }
-// when count down reaches 0 the user looses
