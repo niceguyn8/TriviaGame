@@ -1,0 +1,42 @@
+body {
+  background-color: black;
+  color: red;
+  background-image: url(../images/neon-background.jpg);
+  font-family: 'Black Ops One', cursive;
+  text-align: center;
+}
+
+#display {
+  background-color: Black;
+  /* background-image: url(../images/explosion.gif); */
+  text-align: center;
+  /* padding: 20px; */
+}
+
+h1 {
+  /* font-family: 'Mr Dafoe', cursive; */
+  font-size: 70px;
+  background-image: url(../images/explosion-background.gif);
+}
+
+.answer-button {
+  padding: 10px;
+  margin: 10px;
+}
+
+#reset-button {
+  margin: 20px;
+  padding: 5px;
+}
+
+h2 {
+  margin: 20px;
+  /* padding-top: 20px; */
+}
+
+#timer {
+  margin-top: 20px;
+}
+
+#content {
+}

@@ -21,6 +21,7 @@ var questionsArray = [{
   question: "Who is the best at karate chops and kicks to the face?",
   options: ["Arnold", "Sly", "Bruce Lee", "Bruce Willi"],
   answer: "Bruce Lee",
+  image: "../images.lee.gif",
   // add fun gif later on
 }, {
   question: "Who's butt-kicking skills are only matched by their teaching skills?",
@@ -45,8 +46,8 @@ var gameStart = {
   // Display 1 question from array of questions
   displayQuestion: function(){
     time = setInterval(gameStart.timer,1000);
-    $('#display').html("<h2 id='counter'>30<h2>");
-    $("#display").append('<h2>'+questionsArray[gameStart.questionSelected].question+'</h2>');
+    $('#display').html("<h2 id='timer'>10<h2>");
+    $('#display').append('<h2>'+questionsArray[gameStart.questionSelected].question+'</h2>');
     // Display Answer options (specific to the selected question) from array
     for (var i = 0; i < questionsArray[gameStart.questionSelected].options.length;i++){
       $('#display').append('<button class="answer-button" id="button- '
@@ -98,7 +99,6 @@ var gameStart = {
     } else {
       gameStart.incorrectGuess();
     }
-
   },
   correctGuess: function(){
     console.log("User guessed right");
@@ -118,6 +118,8 @@ var gameStart = {
     $('#display').html('<h2>Wrong! Booooooo!</h2>');
     $('#display').append('<h3>You should have guessed: '
       +questionsArray[gameStart.questionSelected].answer+'</h3>');
+    // $('#display').html('<img>'
+    //   +questionsArray[gameStart.questionSelected].image+'<img>');
     if(gameStart.questionSelected==questionsArray.length-1){
       setTimeout(gameStart.results,3+1000);
     } else {
@@ -126,7 +128,7 @@ var gameStart = {
   },
   reset: function(){
     gameStart.questionSelected = 0;
-    gameStart.timeLeft = 0;
+    gameStart.timeLeft = 10;
     gameStart.wrongAnswer = 0;
     gameStart.correctAnswer = 0;
     gameStart.displayQuestion();
