@@ -16,25 +16,21 @@ $(document).on('click','#reset-button', function(event) {
 // WHEN GAME STARTS:
 // Display 1 question from array of questions
 // Display Answer options (specific to that selected question) from array
-
+// Create array of questions
 var questionsArray = [{
   question: "Who is the best at karate chops and kicks to the face?",
   options: ["Arnold", "Sly", "Bruce Lee", "Bruce Willi"],
   answer: "Bruce Lee",
-  // image: "../images.lee.gif",
-  // add fun gif later on
 }, {
   question: "Who's butt-kicking skills are only matched by their teaching skills?",
   options: ["Kurt Russell", "Arnold", "Jean Claude Van Damme", "Bruce Willi"],
   answer: "Arnold",
-  // add fun gif later on
 }, {
   question: "Who's pities the fool and/or fools?",
   options: ["Sly", "Mr. T", "Robocop", "Kurt Russell"],
   answer: "Mr. T",
-  // add fun gif later on
 }];
-
+// Variable to store gifs
 var gifArray = ['lee', 'arnold', 'mr-t'];
 
 // WHEN GAME STARTS:
@@ -48,7 +44,8 @@ var gameStart = {
   // Display 1 question from array of questions
   displayQuestion: function(){
     time = setInterval(gameStart.timer,1000);
-    $('#display').html("<h2 id='timer'>10<h2>");
+    $('#display').html("<h3>Hurry Up!:</h3>");
+    $('#display').append("<h2 id='timer'>10</h2>");
     $('#display').append('<h2>'+questionsArray[gameStart.questionSelected].question+'</h2>');
     // Display Answer options (specific to the selected question) from array
     for (var i = 0; i < questionsArray[gameStart.questionSelected].options.length;i++){
@@ -83,11 +80,12 @@ var gameStart = {
     $('#display').append('<h3>You should have guessed: '
       +questionsArray[gameStart.questionSelected].answer+'</h3>');
     if(gameStart.questionSelected==questionsArray.length-1){
-      setTimeout(gameStart.results,3+1000);
+      setTimeout(gameStart.results, 5000);
     } else {
-      setTimeout(gameStart.nextQuestion,3+1000);
+      setTimeout(gameStart.nextQuestion, 5000);
     }
       gameStart.wrongAnswer++;
+    $('#gif').html('<img src = "assets/images/'+ gifArray[gameStart.questionSelected] +'.gif" width = "400px">');
   },
   results: function(){
     clearInterval(time);
@@ -106,7 +104,7 @@ var gameStart = {
       gameStart.incorrectGuess();
     }
     // display gif after answer is clicked
-    $('#gif').html('<img src = "assets/images/'+ gifArray[gameStart.questionSelected] +'.gif" width = "400px">');
+    $('#gif').html('<img src = "assets/images/'+ gifArray[gameStart.questionSelected] +'.gif" width = "600px">');
   },
   correctGuess: function(){
     console.log("User guessed right");
@@ -114,9 +112,9 @@ var gameStart = {
     gameStart.correctAnswer++;
     $('#display').html('<h2>You got it, dude!</h2>');
     if(gameStart.questionSelected==questionsArray.length-1){
-      setTimeout(gameStart.results,5000);
+      setTimeout(gameStart.results, 5000);
     } else {
-      setTimeout(gameStart.nextQuestion,5000);
+      setTimeout(gameStart.nextQuestion, 5000);
     }
   },
   incorrectGuess: function(){
@@ -127,9 +125,9 @@ var gameStart = {
     $('#display').append('<h3>You should have guessed: '
       +questionsArray[gameStart.questionSelected].answer+'</h3>');
     if(gameStart.questionSelected==questionsArray.length-1){
-      setTimeout(gameStart.results,5000);
+      setTimeout(gameStart.results, 5000);
     } else {
-      setTimeout(gameStart.nextQuestion,5000);
+      setTimeout(gameStart.nextQuestion, 5000);
     }
   },
   reset: function(){
@@ -138,7 +136,6 @@ var gameStart = {
     gameStart.wrongAnswer = 0;
     gameStart.correctAnswer = 0;
     gameStart.displayQuestion();
+    $('#gif').empty();
   },
-
-
 }
