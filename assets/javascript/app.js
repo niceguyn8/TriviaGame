@@ -18,20 +18,44 @@ $(document).on('click','#reset-button', function(event) {
 // Display Answer options (specific to that selected question) from array
 // Create array of questions
 var questionsArray = [{
+  question: "Who has the 'Eye of the Tiger'",
+  options: ["Arnold", "Stallone", "Bruce Lee", "Bruce Willy"],
+  answer: "Stallone",
+}, {
   question: "Who is the best at karate chops and kicks to the face?",
-  options: ["Arnold", "Sly", "Bruce Lee", "Bruce Willi"],
+  options: ["Arnold", "Slallone", "Bruce Lee", "Bruce Willi"],
   answer: "Bruce Lee",
 }, {
   question: "Who's butt-kicking skills are only matched by their teaching skills?",
-  options: ["Kurt Russell", "Arnold", "Jean Claude Van Damme", "Bruce Willi"],
+  options: ["Kurt Russell", "Arnold", "Jean Claude Van Damme", "Bruce Willy"],
   answer: "Arnold",
 }, {
   question: "Who's pities the fool and/or fools?",
   options: ["Sly", "Mr. T", "Robocop", "Kurt Russell"],
   answer: "Mr. T",
+}, {
+  question: "This one is objectively one of the best at doing at splits.",
+  options: ["Kurt Russell", "Arnold", "Jean Claude Van Damme", "Stallone",],
+  answer: "Jean Claude Van Damme",
+}, {
+  question: "Yippee-Ki-Yay!",
+  options: ["Arnold", "Bruce Willy", "Chuck Norris", "Stallone",],
+  answer: "Bruce Willy",
+}, {
+question: "This guy is in 'Big Trouble'.",
+options: ["Kurt Russell", "Bruce Lee", "Stallone", "Jean Claude Van Damme",],
+answer: "Kurt Russell",
+}, {
+question: "Known for vacationing in Beverly Hills.",
+options: ["Eddie Murphy", "Stallone", "Bruce Willy", "Arnold", "Mr. T"],
+answer: "Eddie Murphy",
+}, {
+question: "Superman goes to bed wearing pajamas with which of these tough dudes on them?",
+options: ["Bruce Lee", "Stallone", "Bruce Willy", "Arnold", "Chuck Norris"],
+answer: "Chuck Norris",
 }];
 // Variable to store gifs
-var gifArray = ['lee', 'arnold', 'mr-t'];
+var gifArray = ['stallone','lee', 'arnold', 'mr-t', 'jcvd', 'die-hard', 'kurt', 'eddie', 'chuck'];
 
 // WHEN GAME STARTS:
 var gameStart = {
